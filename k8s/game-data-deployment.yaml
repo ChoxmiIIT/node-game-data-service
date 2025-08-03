@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: node-game-data-service
-        image: 734842486567.dkr.ecr.us-east-2.amazonaws.com/node-game-data-service:latest
+        image: 734842486567.dkr.ecr.us-east-2.amazonaws.com/cmm707/node-game-data-service:latest
         env:
         - name: MYSQL_HOST
           value: mysql-gamedb
