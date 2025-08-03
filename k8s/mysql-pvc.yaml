@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: cmm707-sc
+  storageClassName: gp2
   resources:
     requests:
       storage: 1Gi
