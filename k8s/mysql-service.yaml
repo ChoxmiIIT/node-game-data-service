@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: clickhouse-analytics
+  name: mysql-gamedb
 spec:
   ports:
-    - port: 8123
+    - port: 3306
   selector:
-    app: clickhouse-analytics
+    app: mysql-gamedb
