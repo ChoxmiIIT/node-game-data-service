@@ -39,4 +39,8 @@ app.get('/games', (req, res) => {
     });
 });
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the Game Data Service');
+});
+
 app.listen(5000, () => console.log('Game Data Service running on port 5000'));
