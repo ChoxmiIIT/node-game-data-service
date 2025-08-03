@@ -1,9 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-gamedb
+  name: node-game-data-service
 spec:
-  ports:
-    - port: 3306
   selector:
-    app: mysql-gamedb
+    app: node-game-data-service
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
