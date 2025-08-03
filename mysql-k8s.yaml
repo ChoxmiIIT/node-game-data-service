@@ -1,0 +1,74 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-gamedb-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gamedb-initdb
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS gamedb;
+    USE gamedb;
+    CREATE TABLE IF NOT EXISTS games (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        category VARCHAR(100),
+        released_date DATE,
+        price DECIMAL(10,2),
+        image_url VARCHAR(255)
+    );
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-gamedb
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql-gamedb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-gamedb
+spec:
+  selector:
+    matchLabels:
+      app: mysql-gamedb
+  template:
+    metadata:
+      labels:
+        app: mysql-gamedb
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: rootpass
+        - name: MYSQL_DATABASE
+          value: gamedb
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-gamedb-pvc
+      - name: initdb
+        configMap:
+          name: gamedb-initdb
