@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 console.log('Game Data Service starting...');
-log('Connecting to MySQL database...', {
+console.log('Connecting to MySQL database...', {
     host: process.env.MYSQL_HOST || 'localhost',
     user: process.env.MYSQL_USER || 'root',
     password: process.env.MYSQL_PASSWORD || '',
