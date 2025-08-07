@@ -5,6 +5,8 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS gamedb;
+    CREATE USER game_user IDENTIFIED WITH plaintext_password BY 'game_password';
+    GRANT ALL ON gamedb.* TO game_user;
     USE gamedb;
     CREATE TABLE IF NOT EXISTS games (
         id INT AUTO_INCREMENT PRIMARY KEY,

@@ -15,8 +15,10 @@ spec:
       - name: mysql
         image: mysql:8.0
         env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: rootpass
+        - name: MYSQL_USER
+          value: game_user
+        - name: MYSQL_PASSWORD
+          value: game_password
         - name: MYSQL_DATABASE
           value: gamedb
         ports:
