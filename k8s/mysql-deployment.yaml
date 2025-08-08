@@ -19,10 +19,6 @@ spec:
           value: rootpass
         - name: MYSQL_DATABASE
           value: gamedb
-        - name: MYSQL_USER
-          value: game_user
-        - name: MYSQL_PASSWORD
-          value: game_password
         ports:
         - containerPort: 3306
         volumeMounts:

@@ -20,7 +20,7 @@ const db = mysql.createConnection({
 
 db.connect();
 
-app.post('/games', (req, res) => {
+app.post('/game-data/games', (req, res) => {
     const { name, category, released_date, price, image_url } = req.body;
     db.query(
         'INSERT INTO games (name, category, released_date, price, image_url) VALUES (?, ?, ?, ?, ?)',
@@ -32,14 +32,21 @@ app.post('/games', (req, res) => {
     );
 });
 
-app.get('/games', (req, res) => {
+app.get('/game-data/games', (req, res) => {
     db.query('SELECT * FROM games', (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json(results);
     });
 });
 
-app.get('/', (req, res) => {
+app.get('/game-data/game/:id', (req, res) => {
+    db.query(`SELECT * FROM games WHERE id = ${req.params.id}`, (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(results);
+    });
+});
+
+app.get('/game-data/', (req, res) => {
     res.send('Welcome to the Game Data Service');
 });
 

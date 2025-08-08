@@ -17,11 +17,11 @@ spec:
         env:
         - name: MYSQL_HOST
           value: mysql-gamedb
-        - name: MYSQL_USER
-          value: root
-        - name: MYSQL_PASSWORD
-          value: rootpass
         - name: MYSQL_DATABASE
           value: gamedb
+        - name: MYSQL_USER
+          value: game_user
+        - name: MYSQL_PASSWORD
+          value: game_password
         ports:
         - containerPort: 5000
